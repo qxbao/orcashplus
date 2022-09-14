@@ -1,5 +1,5 @@
 let miner, highper = true;
-const stored_blockchain = [];
+let stored_blockchain = [];
 
 const addLine = (str) => {
     $('#terminal').append(`<div class="text-break">>>${str}</div>`);
@@ -43,6 +43,7 @@ const mineTheBlock = async (block, difficult) => {
             const str = typeof block.data == 'string' ? [String(block.timestamp), block.data, String(block.hash), String(block.lastHash), String(proof)].join('#') : [String(block.timestamp), JSON.stringify(block.data), String(block.hash), String(block.lastHash), String(proof)].join('#');
             const hash = sha256(str);
             if (hash.slice(0, difficult) == Array(difficult + 1).join('0')) {
+                console.log('success', str);
                 addLine(`Đào thành công Block ${hash}. Đang xác minh...`);
                 socket.emit("send proof", hash, proof, wallet);
                 return clearInterval(miner);
@@ -77,13 +78,12 @@ $(document).ready(() => {
     })
 
     socket.on("get blockchain data", (block, id) => {
+        console.log('wtf:', block);
         addLine(`Đã thêm block số ${id + 1}`);
         stored_blockchain[id] = block;
     })
 
     socket.on("get blockchain data done", () => {
-        localStorage.blockchain = JSON.stringify(stored_blockchain);
-
         addLine(`Blockchain tiếp nhận có độ dài: ${stored_blockchain.length}`);
         addLine(`Độ khó block: ${Math.ceil(2 + 7 * (stored_blockchain.length / 19072004))}`);
         addLine('Đã lưu vào LocalStorage!');
@@ -101,8 +101,7 @@ $(document).ready(() => {
     socket.on("request blockchain data", () => {
         try{
             if (!has_blockchain) return false;
-            const myChain = JSON.parse(localStorage.blockchain);
-            socket.emit('get blockchain data', myChain | stored_blockchain);
+            socket.emit('get blockchain data', stored_blockchain);
         }
         catch{
             console.error;
@@ -112,20 +111,23 @@ $(document).ready(() => {
     socket.on("check hash", (hash, proof, addr) => {
         if (addr == wallet) return false;
         addLine(`Một block mới đã được đào bởi: ${addr}. Đang xác minh...`)
-        const _blockchain = JSON.parse(localStorage.blockchain);
-        const last_block = _blockchain[_blockchain.length - 1];
-        const hashed =  _blockchain.length == 1 ? sha256([String(last_block.timestamp), last_block.data, String(last_block.hash), String(last_block.lastHash), String(proof)].join('#')) : sha256([String(last_block.timestamp), JSON.stringify(last_block.data), String(last_block.hash), String(last_block.lastHash), String(proof)].join('#'));
+        const last_block = stored_blockchain[stored_blockchain.length - 1];
+        const hashed =  stored_blockchain.length == 1 ? sha256([String(last_block.timestamp), last_block.data, String(last_block.hash), String(last_block.lastHash), String(proof)].join('#')) : sha256([String(last_block.timestamp), JSON.stringify(last_block.data), String(last_block.hash), String(last_block.lastHash), String(proof)].join('#'));
+        console.log([String(last_block.timestamp), JSON.stringify(last_block.data), String(last_block.hash), String(last_block.lastHash), String(proof)].join('#'));
         if (hashed == hash) {
             if (hash.slice(0, Math.ceil(2 + 7 * (stored_blockchain.length / 19072004))) !== Array(Math.ceil(2 + 7 * (stored_blockchain.length / 19072004)) + 1).join('0')) {
+                console.log(hashed, hash);
                 addLine('<span class="text-danger">Block không hợp lệ!<span>');
-                return socket.emit('vote', hash, false)
+                return socket.emit('vote', addr, false)
             }
-            addLine('<span class="text-success">Block hợp lệ!<span>')
-            socket.emit('vote', hash, true)
+            addLine('<span class="text-success">Block hợp lệ!<span>');
+            // chống spam
+            socket.emit('vote', addr, true)
         }
         else {
+            console.log(hashed, hash);
             addLine('<span class="text-danger">Block không hợp lệ!<span>');
-            socket.emit('vote', hash, false)
+            socket.emit('vote', addr, false)
         }
     })
 
@@ -139,24 +141,29 @@ $(document).ready(() => {
     });
 
     socket.on('new block added', (block, addr) => {
+        console.log(block);
         highper = false;
         clearInterval(miner);
-        const nonstop = $("#nonStop").is(":checked")
-        const hashed =  stored_blockchain.length == 1 ? sha256([String(last_block.timestamp), last_block.data, String(last_block.hash), String(last_block.lastHash), String(proof)].join('#')) : sha256([String(last_block.timestamp), JSON.stringify(last_block.data), String(last_block.hash), String(last_block.lastHash), String(proof)].join('#'));
+        const nonstop = $("#nonStop").is(":checked");
+        const last_block = stored_blockchain[stored_blockchain.length - 1];
+        console.log(last_block);
+        const str = typeof last_block.data == 'string' ? [String(last_block.timestamp), last_block.data, String(last_block.hash), String(last_block.lastHash), String(block.proof)].join('#') : [String(last_block.timestamp), JSON.stringify(last_block.data), String(last_block.hash), String(last_block.lastHash), String(block.proof)].join('#');
+        const hashed = sha256(str);
         console.log(block.lastHash, hashed);
-        if (hashed !== block.lastHash) return socket.emit('request blockchain data');
+        if (hashed !== block.lastHash) {
+            addLine("Blockchain hết hạn. Đang yêu cầu một chuỗi mới...");
+            return socket.emit('request blockchain data');
+        }
         stored_blockchain.push(block);
         addLine(`Một block mới đã được tìm ra bởi ${addr}.`);
         if (nonstop) {
             addLine('Chuẩn bị đào block tiếp theo. (3s)');
-        
             setTimeout(() => {
                 const lastBlock = stored_blockchain[stored_blockchain.length - 1];
                 mineTheBlock(lastBlock, Math.ceil(2 + 7 * (stored_blockchain.length / 19072004)));
             }, 3000);
         }
         else {
-            addLine('')
             socket.emit('quit mine', wallet)
             addLine('<span class="text-danger">Non-stop = False -> Dừng đào tại đây<span>');
             $('#connectButton').prop('disabled', false);

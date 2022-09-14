@@ -10,4 +10,7 @@ $(document).ready(() => {
     $("#reloadBalanceButton").click(() => {
         get_balance();
     })
+    $.get('http://ip-api.com/json/', (res) => {
+        $('#ip').text(res.query);
+    })
 });

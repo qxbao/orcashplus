@@ -26,8 +26,8 @@ class Blockchain {
     }
 
     last_block () {
-        const chain = this.#data.slice();
-        return chain[ chain.length - 1 ];
+        console.log(this.get_data())
+        return this.#data[ this.#data.length - 1 ];
     }
 
     add_block (block) {
@@ -64,6 +64,9 @@ class Blockchain {
     async get_balance(address){
         let [spent, received] = [0, 0];
         await this.load();
+        const [ spent_queue ] = await db.execute('SELECT amount FROM transactions WHERE sender = ?', [address]);
+        const [ received_queue ] = await db.execute('SELECT amount FROM transactions WHERE receiver = ?', [address]);
+        const [ spent_prcd, received_prcd ] = [spent_queue.reduce((a, b) => a + b, 0), received_queue.reduce((a, b) => a + b, 0)]
         const _blockchain = this.get_data();
         for (let i = 0; i < _blockchain.length; i++) {
             if (i == 0) continue;
@@ -72,11 +75,11 @@ class Blockchain {
                 if (transaction.receiver == address) received += transaction.amount;
             }
         }
-        return received - spent;
+        return received + spent_prcd - ( received_prcd + spent );
     }
 
     async load() {
-        const [blocks, field] = await db.execute('SELECT * FROM blockchain ORDER BY `order` ASC');
+        const [blocks] = await db.execute('SELECT * FROM blockchain ORDER BY `order` ASC');
         if (!blocks.length) return this.save();
         const temp_chain = [];
         for (let i = 0; i < blocks.length; i++) {
@@ -90,11 +93,13 @@ class Blockchain {
             temp_chain.push(temp_block);
         }
         this.#data = temp_chain;
+        console.log('afterload :', this.#data);
         return temp_chain;
     }
 
     async save () {
         console.log("Lưu chain mới vào hệ thống...");
+        console.log("This.getdata: " , this.get_data())
         if (!Verifier.verifyBlockchain(this.get_data())) return false;
         await db.execute('TRUNCATE TABLE blockchain');
         const chain = this.get_data();

@@ -4,6 +4,8 @@
 ## Giới thiệu
 Dự án được phát triển nhằm cung cấp kiến thức về block chain cho những ai muốn tìm hiểu. Hầu hết tính năng của một hệ thống phân tán đều đã được xây dựng (1 số không thể do giới hạn về kỹ thuật cũng như số lượng node tham gia).
 
+Web hỗ trợ responsive cho tất cả thiết bị (trừ Nokia 1280)
+
 - Mạng Peer-to-Peer: Sử dụng library [Socket.io](https://www.npmjs.com/package/socket.io)
 - Template engine: Pug/Jade
 
