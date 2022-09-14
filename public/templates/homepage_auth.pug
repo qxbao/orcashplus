@@ -1,0 +1,67 @@
+doctype html
+html(lang="en")
+    head
+        meta(charset="UTF-8")
+        meta(http-equiv="X-UA-Compatible", content="IE=edge")
+        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        title Trang chủ - Orcash+
+        include essentials
+        link(href="/styles/homepage_auth.css" rel="stylesheet")
+        script(src="/scripts/homepage_auth.js")
+    body
+        include navbar
+        .container.mt-5
+            .row
+                .col-12.col-lg-8.align-items-center.d-flex.mb-5
+                    .card.w-100.rounded-1.h-100
+                        .card-body.p-4.py-5
+                            .input-group.mb-1#walletAddress
+                                span.input-group-text.fw-light Địa chỉ ví
+                                input(disabled value=wallet_address).form-control.font-code
+                            p.mb-4.fw-light Bạn đang sử dụng dịch vụ quản lý ví điện tử.
+                            .row
+                                .col-12.col-lg-6.fw-light.align-items-stretch
+                                    .mb-3.d-flex.align-items-center
+                                        span.me-1.text-success Số dư:
+                                        span.me-1#balance null
+                                        span ORC
+                                        button.px-2.font-code.ms-auto.fw-light#reloadBalanceButton Reload
+                                    hr
+                                    .mb-3.d-flex.align-items-center
+                                        .me-1 IP truy cập:
+                                        span.font-code#ip 192.168.1.1
+                                    hr
+                                    p Rủi ro bảo mật:
+                                        span.text-info  An toàn
+                                    hr
+                                .col-12.col-lg-6.fw-light
+                                    p Key-pair verification: 
+                                        span.text-info  Hợp lệ
+                                    hr
+                                    p Tình trạng ví: 
+                                        span.text-info  Sẵn sàng giao dịch
+                                    hr
+                                    p Smart contract: Áp dụng
+                                    hr
+                .col-12.col-lg-4.align-items-center.d-flex.mb-5.align-items-stretch
+                    .card.w-100
+                        .card-body.p-4.d-flex.flex-column
+                            h1.mx-auto Mining pool
+                            p.m-auto.font-code.fw-light // đang phát triển //
+                .card.w-100.mb-5
+                        .card-header
+                            h3.text-center.my-2 Tạo giao dịch mới
+                        .card-body.p-4
+                            .row.font-code
+                                .col-12.col-lg-7
+                                    p Địa chỉ ví
+                                    input.transferInput.px-2
+                                .col-12.col-lg-2
+                                    p Số tiền gửi
+                                    input(type="number" placeholder = "ORC").transferInput.px-2
+                                .col-12.col-lg-3
+                                    p Phí chuyển tiền
+                                    input(type="number" placeholder = "ORC").transferInput.px-2
+                            p.mt-3.mb-0.fw-light Lưu ý: Giao dịch sau khi được xác nhận sẽ vào danh sách chờ. Mỗi 1 block được đào sẽ tự động thực hiện 10 giao dịch có mức phí chuyển cao nhất.
+                        .card-footer.text-center.py-3
+                            button.btn.btn-light.w-50.rounded-1 Tạo giao dịch

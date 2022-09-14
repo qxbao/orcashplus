@@ -1,0 +1,21 @@
+#info-card {
+    background: #121212;
+    box-shadow: 0 0 10px rgb(12, 12, 12);
+}
+
+.yesBtn {
+    background:#406CDE;
+    border:none;
+    border-radius: 3px;
+    color: white !important;
+    text-decoration: none;
+    opacity:0.85;
+}
+
+.yesBtn.red {
+    background: #FF0033;
+}
+
+.yesBtn:hover {
+    opacity: 1;
+}

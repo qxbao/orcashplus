@@ -1,0 +1,22 @@
+#loginCard {
+    background: #121212;
+    box-shadow: 0 0 5px #121212;
+}
+
+#loginButton {
+    background:#406CDE;
+    border:none;
+    border-radius: 3px;
+    color: white !important;
+}
+
+#loginButton:hover {
+    background:#2a51b4;
+}
+
+.loginInput {
+    background:none;
+    border: none;
+    outline: none;
+    color: #ececec;
+}

@@ -1,0 +1,15 @@
+#registerCard {
+    background: #121212;
+    box-shadow: 0 0 5px #121212;
+}
+
+#confirmButton {
+    background:#406CDE;
+    border:none;
+    border-radius: 3px;
+    color: white !important;
+}
+
+#confirmButton:hover {
+    background:#2a51b4;
+}

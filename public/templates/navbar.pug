@@ -1,0 +1,71 @@
+nav.navbar.navbar-expand-lg.sticky-top.navbar-dark#mainNav
+    .container.py-3
+        .d-flex.align-items-center
+            img(src="/images/logo.png" width="35rem").d-inline-block.align-text-top.me-0
+            a(href="/").h1.text-decoration-none.text-light.user-select-none RCASH+
+        button(data-bs-target="#navbar-content" aria-controls="navbar-content" data-bs-toggle="collapse" aria-expanded="false").navbar-toggler
+            span.navbar-toggler-icon
+        .collapse.navbar-collapse#navbar-content
+            ul.navbar-nav.mb-2.mb-lg-0.ms-lg-3.me-auto
+                li.nav-item
+                    a(href="/").nav-link#homeNav
+                        i.bi.bi-house-door.d-lg-none.me-2
+                        | Trang chủ
+                li.nav-item
+                    a(href="/documentation").nav-link#docNav
+                        i.bi.bi-file-text.d-lg-none.me-2
+                        | Tài liệu
+                li.nav-item
+                    a(href="/blockchain").nav-link#blockchainNav 
+                        i.bi.bi-square.d-lg-none.me-2
+                        | Blockchain
+                li.nav-item
+                    a(href="/download").nav-link#downloadNav
+                        i.bi.bi-download.d-lg-none.me-2
+                        | Tải phần mềm
+            div
+                if auth
+                    .d-grid.gap-2.d-block.d-lg-none
+                        button.btn#transferButton.rounded-1.me-lg-2.py-2.px-lg-3 Chuyển khoản
+                        button.btn#checkButton.rounded-1.py-2.px-lg-3 Ví của tôi
+                    .d-none.d-lg-block
+                        button.btn#transferButton.rounded-1d-inline.me-lg-2.py-2.px-lg-3
+                            i.bi.bi-bank.me-2
+                            | Tạo giao dịch
+                        a(href="/" target="_blank").text-decoration-none
+                            button.btn#checkButton.rounded-1.d-inline.py-2.px-lg-3
+                                i.bi.bi-wallet2.me-2
+                                | Ví của tôi
+                else
+                    .btn-group.w-100
+                        a(href = "/login").btn.btn-outline-light.rounded-0.py-2 Đăng nhập
+                        a(href = "/createwallet").btn.btn-light.rounded-0.py-2 Tạo ví mới
+
+script.
+    const navPositionHandler = () => {
+        const position = $(window).scrollTop();
+        if (position > 0) {
+            $('#mainNav').css('background', '#101010');
+            $('#mainNav').css('box-shadow', '0px 0.5px 5px black');
+        }
+        else {
+            $('#mainNav').css('background', 'rgb(0,0,0, 0.4)');
+            $('#mainNav').css('box-shadow', 'none');
+        }
+    }
+
+    $(window).scroll(() => {
+        navPositionHandler();
+    });
+
+    $(document).ready(() => {
+        $('.navbar-toggler').click(function(){
+            if ($(this).hasClass('collapsed')) {
+                navPositionHandler();
+            }
+            else {
+                $('#mainNav').css('background', '#101010');
+                $('#mainNav').css('box-shadow', '0px 0.5px 5px black');
+            }
+        })
+    })

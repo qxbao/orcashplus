@@ -1,0 +1,68 @@
+doctype html
+html(lang="en")
+    head
+        meta(charset="UTF-8")
+        meta(http-equiv="X-UA-Compatible", content="IE=edge")
+        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        title Blockchain
+        include essentials
+        link(href="/styles/blockchain.css" rel="stylesheet")
+        script(src="/scripts/sha256.js")
+        script.
+            const wallet = "#{wallet_address}";
+        script(src="/scripts/blockchain.js")
+        script(src="https://cdn.jsdelivr.net/npm/ipfs/dist/index.min.js")
+    body
+        include navbar
+        .container.my-4
+            .row
+                .col-12.col-lg.mb-3.order-lg-2
+                    .card.border-0.rounded-0.w-100#configCard
+                        .card-header.rounded-0
+                            h4.text-center.mb-0.font-code Bảng điều khiển
+                        .card-body.fs-5.p-4.font-button.fw-light
+                            .btn-group.w-100.mb-5.fw-bold
+                                button(disabled).btn.btn-outline-danger.rounded-0#stopButton Ngắt kết nối
+                                button.btn#connectButton Kết nối
+                            .row.mb-3
+                                .col-12.col-lg
+                                    .form-check.form-switch.mb-3
+                                        label.form-check-label Thuật toán ngẫu nhiên
+                                        input(type='checkbox').form-check-input#randomAlgorithm
+                                    .form-check.form-switch.mb-3
+                                        label.form-check-label Brute-force
+                                        input(type='checkbox' checked disabled).form-check-input
+                                    .form-check.form-switch.mb-3
+                                        label.form-check-label Xử lý hash tự động
+                                        input(type='checkbox' checked disabled).form-check-input
+                                    .form-check.form-switch.mb-3
+                                        label.form-check-label Rage mode
+                                            small.text-danger.ms-1 *
+                                        input(type='checkbox').form-check-input#highPerformance
+                                .col-12.col-lg
+                                    .form-check.form-switch.mb-3
+                                        label.form-check-label Hạ công suất đào
+                                        input(type='checkbox').form-check-input#lowPerformance
+                                    .form-check.form-switch.mb-3
+                                        label.form-check-label Thuật toán thử nghiệm
+                                        input(type='checkbox' disabled).form-check-input
+                                    .form-check.form-switch.mb-3
+                                        label.form-check-label Non-stop mode
+                                        input(type='checkbox' checked).form-check-input#nonStop
+                                    .form-check.form-switch.mb-3
+                                        label.form-check-label Nhận thông báo chi tiết
+                                        input(type='checkbox' checked).form-check-input#detailedNotif   
+                            div
+                                small.d-block.mb-3
+                                    span.text-danger *
+                                    | : sử dụng hết công suất, có thể gây lag trình duyệt
+                                small Bằng việc kết nối, bạn đã trở thành một node trong mạng peer-to-peer. Enjoy!
+                .col-12.col-lg.d-flex.mb-3.order-lg-1
+                    .card.rounded-0.w-100#terminalCard
+                        .card-header.rounded-0(style = "background: #8e8e8e")
+                            .font-code(style = "color:black") Terminal
+                        .card-body.py-4(style = "background: rgb(0,0,0,0.8)")
+                            .overflow-auto.font-code#terminalOverflow(style = "height:60vh;") 
+                                #terminal
+                                    div Hệ thống đã sẵn sàng. Đang đợi lệnh từ bạn. (☉_ ☉)
+                

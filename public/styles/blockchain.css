@@ -1,0 +1,31 @@
+body {
+    background: url('/images/blockchain-background.jpg');
+    background-position: top;
+    background-repeat: repeat;
+    background-size: contain;
+}
+
+#terminalCard {
+    background: transparent;
+    box-shadow: 0 0 10px rgb(12, 12, 12);
+}
+
+#configCard {
+    background: black;
+}
+
+#configCard .card-header {
+    border: 1px solid #007fff;
+    color: #0480fd;
+}
+
+#connectButton {
+    background: #1cca13;
+    color: black;
+    border-top-right-radius: 3px;
+    border-bottom-right-radius: 3px;
+}
+
+#connectButton:hover {
+    background: #28ac21;
+}

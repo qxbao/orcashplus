@@ -1,0 +1,47 @@
+doctype html
+html(lang="en")
+    head
+        meta(charset="UTF-8")
+        meta(http-equiv="X-UA-Compatible", content="IE=edge")
+        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        title Orcash+ • Built & developed by Orca
+        include essentials
+        link(href="/styles/homepage.css" rel="stylesheet")
+        script(src="/scripts/homepage.js")
+    body
+        include navbar
+        .container
+            .row(style="height: 90vh").d-none.d-lg-flex
+                .col.h-100.d-flex.align-items-center
+                    .flex-column.justify-content-center
+                        .mb-4
+                            h1 Chào mừng đến với
+                            h1.fw-bold ORCASH+
+                        h3.fw-light Dự án hỗ trợ tìm hiểu blockchain qua nền tảng webapp.
+                        h3.fw-light
+                            a(href = "/createwallet").text-info Đăng ký ngay
+                            |  để tham gia cùng chúng tôi.
+                        p * Thủ tục tạo ví đơn giản, không yêu cầu cung cấp thông tin.
+                .col.d-flex.h-100.align-items-center
+                        .card.border-none.rounded-0.m-auto.w-75.h-50.border-0#info-card
+                            .card-header
+                                span(style = "color: #04ca9f") PUBLIC_INFO.TXT
+                            .card-body
+                                span.font-code#info-container
+                                span#pointer
+            div(style="height: 90vh").d-flex.d-lg-none.align-items-center
+                div.text-center.m-auto
+                    h1.fw-bold Xin chào!
+                    p.fw-light Bạn có muốn tham gia dự án không?
+                    .mt-5
+                        a(href = "/createwallet").yesBtn.d-block.m-auto.mb-3.p-3 CÓ CHỨ!!!
+                        a(href = "/createwallet").yesBtn.red.d-block.m-auto.p-3 VẪN LÀ CÓ NHƯNG MÀU ĐỎ
+        .container.pb-5
+            .m-auto.text-center.w-75
+                h1.text-center.mb-4 Về chúng tôi
+                p ------
+                p.fw-light
+                    b Orcash+
+                    |  là dự án phi lợi nhuận được thành lập với mục đích phổ cập kiến thức về Blockchain - một khái niệm chúng ta nghe tới rất nhiều nhưng lại ít ai có thể hiểu được nó thực sự hoạt động ra sao. Đừng lo, bằng việc đăng ký một địa chỉ ví, tự mình trải nghiệm "Blockchain" hay tự sở hữu "Cryptocurrency", tôi tin rằng bạn sẽ dễ dàng hiểu, thậm chí có thể tự tạo ra một nền tảng blockchain cho riêng mình.
+                p.fw-light Tất cả thông tin như public key, private key hay toàn bộ truy cập của bạn đều sẽ không được lưu lại. Đây là một dự án open-source, bạn hoàn toàn có thể kiểm tra tính minh bạch qua mã nguồn. Cũng vì vậy, xin hãy tự lưu trữ thông tin của chính mình cẩn thận. Việc mất private key chắc chắn sẽ khiến bạn không thể truy cập lại vào ví của mình.
+        include footer

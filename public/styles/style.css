@@ -1,0 +1,89 @@
+@import url('https://fonts.googleapis.com/css2?family=Source+Code+Pro&family=Source+Sans+Pro:wght@300;400;600&display=swap');
+@import url('font-face.css');
+
+* {
+    transition: 0.5s all;
+}
+
+.font-code {
+    font-family: 'Source Code Pro', monospace;
+}
+
+.font-button {
+    font-family: 'Source Sans Pro', sans-serif;
+}
+
+::selection {
+    color: black;
+    background: #1ac7c1;
+}
+
+::-webkit-scrollbar {
+    width: 5px;
+}
+  
+/* Track */
+::-webkit-scrollbar-track {
+background: transparent;
+
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+background: #888;
+border-radius:100px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+background: rgb(114, 114, 114);
+}
+
+button {
+    font-family: 'Source Sans Pro' !important;
+    font-weight: 600;
+}
+
+body {
+    background: url('/images/background.jpg');
+    background-repeat: repeat-y;
+    background-size: auto;
+    color: #f5f5f5;
+    font-family: 'Gilroy';
+    font-weight: 400;
+}
+
+#mainNav {
+    background: rgb(0,0,0, 0.4);
+}
+
+.navbar-toggler {
+    transition: 0.5s all;
+    border-radius: 3px;
+    border: none;
+    box-shadow: none !important;
+}
+
+.navbar-toggler:hover {
+    background: #474747;
+}
+
+.navbar-toggler:active {
+    background: #6e6e6e;
+}
+
+#transferButton {
+    background:#2cbd12;
+    border:none;
+    border-radius: 3px;
+    color: black !important;
+    text-decoration: none;
+}
+
+#checkButton {
+    background:#4e6396;
+    border:none;
+    border-radius: 3px;
+    color: white !important;
+    text-decoration: none;
+}

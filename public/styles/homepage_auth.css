@@ -1,0 +1,41 @@
+.card {
+    background: #121212;
+    box-shadow: 0 0 10px rgb(12, 12, 12);
+}
+
+#walletAddress input {
+    background: black;
+    border: none;
+    color:#bcbcbc;
+    border-top-right-radius: 3px;
+    border-bottom-right-radius: 3px;
+}
+
+#walletAddress span {
+    background:#5a5a5a;
+    color:white;
+    border: none;
+    border-top-left-radius: 3px;
+    border-bottom-left-radius: 3px;
+}
+
+#reloadBalanceButton {
+    background:#737373;
+    border:none;
+    border-radius: 3px;
+    color: white !important;
+}
+
+.transferInput {
+    width: 100%;
+    border: 2px solid white;
+    background:black;
+    color:white;
+}
+
+.transferInput:focus {
+    outline: none;
+    background: white;
+    color:black;
+    transform: scaleX(1.05)
+}

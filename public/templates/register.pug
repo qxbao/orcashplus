@@ -1,0 +1,35 @@
+doctype html
+html(lang="en")
+    head
+        meta(charset="UTF-8")
+        meta(http-equiv="X-UA-Compatible", content="IE=edge")
+        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        title Tạo ví mới
+        include essentials
+        link(href="/styles/register.css" rel="stylesheet")
+        script(src="/scripts/register.js")
+    body
+        include navbar
+        .container.d-flex.align-items-center(style = "height:75vh")
+            .card.m-auto.border-0.w-100.p-2#registerCard
+                .card-header
+                    h3.font-button(style = "color: #1abb1a") Điều khoản sử dụng
+                        span.ms-2.h6
+                .card-body
+                    p.fw-light Bằng việc ấn nút chấp thuận, bạn cam kết: 
+                        b.text-danger 1.
+                        |  Không gây ra hành vi có tính phá hoại tới website. 
+                        b.text-danger 2.
+                        |  Chịu hoàn toàn trách nhiệm về hành vi của bản thân. 
+                        b.text-danger 3.
+                        |  Hỗ trợ xây dựng dự án, báo cáo khi phát hiện lỗi (không lạm dụng). 
+                    b Lưu ý:
+                    ul.ps-4
+                        li.fw-light Sau khi tạo ví, hãy nhớ lưu lại cặp khóa của bạn vào một nơi an toàn.
+                        li.fw-light Cặp khóa được sử dụng để đăng nhập
+                .card-footer.d-flex
+                    button.ms-auto.px-5.py-2.my-2#confirmButton CHẤP THUẬN
+            div(style = "display: none;").card.m-auto.border-0.w-75.p-2.text-dark.rounded-1#walletCard
+                .card-body.text-center
+                    p Đang khởi tạo ví...
+                    .spinner-border

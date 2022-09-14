@@ -1,0 +1,35 @@
+doctype html
+html(lang="en")
+    head
+        meta(charset="UTF-8")
+        meta(http-equiv="X-UA-Compatible", content="IE=edge")
+        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        title Đăng nhập
+        include essentials
+        link(href="/styles/login.css" rel="stylesheet")
+        script(src="/scripts/login.js")
+    body
+        include navbar
+        .container.d-flex.align-items-center(style = "height:75vh")
+            .card.m-auto.border-0.w-100.p-2#loginCard
+                .card-header
+                    h3(style = "color: #149414").font-code login.panel
+                        span.ms-2.h6
+                .card-body.font-code
+                    .mb-3.d-flex.align-items-center
+                        .d-flex
+                            .text-danger const 
+                            .mx-2 public_key
+                        .d-flex.me-2 =
+                        input(placeholder="type here...").loginInput.d-flex.w-100#publicInput
+                    .d-flex.align-items-center
+                        .d-flex
+                            .text-danger const 
+                            .mx-2 private_key
+                        .d-flex.me-2 =
+                        input(placeholder="type here...").loginInput.d-flex.w-100#privateInput
+                    .my-3#status-container(style = "display: none;")
+                        span.me-2 >>> Trạng thái:
+                        span#connection-status
+                .card-footer.d-flex
+                    button.ms-auto.px-4.py-2#loginButton Xác thực cặp khóa
