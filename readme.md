@@ -23,3 +23,9 @@ Dự án được phát triển nhằm cung cấp kiến thức về block chain
         npm install
 ## Chi tiết
 Xem thêm tại page "Tài liệu" trên web sau khi chạy server.
+
+## Hình ảnh
+Một số hình ảnh thực tiễn về UI/UX nhà làm
+![ảnh 1](https://i.ibb.co/TwLG9Pg/image.png)
+![ảnh 2](https://i.ibb.co/jzrzyMn/image.png)
+![ảnh 3](https://i.ibb.co/1rXswNt/image.png)
